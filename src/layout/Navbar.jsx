@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from '@/componenet/Button'
 import { Menu, X } from "lucide-react";
 import { useState } from 'react';
@@ -7,11 +7,22 @@ const navlinks=[
   {href:"#about", label:"About"},
   { href: "#projects", label: "Projects" },
   { href: "#experience", label: "Experience" },
-  { href: "#testimonials", label: "Testimonials" },
+   { href: "#testimonials", label: "Testimonials" },
 ]
-
 const Navbar = () => {
  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+ const [isScrolled, setisScrolled] = useState(false)
+
+
+
+ useEffect(()=>{
+  const handleScroll=()=>{
+    setisScrolled(window.scrollY>50);
+
+  }
+  window.addEventListener("scroll",handleScroll);
+  return()=> window.removeEventListener("scroll",handleScroll);
+ },[]);
   return (
 <header className='fixed inset-x-0 top-0 z-50 bg-transparent py-5'>
   <nav className='container mx-auto px-6 flex items-center justify-between'>
@@ -31,7 +42,6 @@ const Navbar = () => {
     <div className="hidden md:flex">
      <Button size="sm">Contact Me</Button>
     </div>
-
     <button type='button' aria-expanded={isMobileMenuOpen} className='md:hidden p-2 text-foreground cursor-pointer transition-colors duration-200 hover:text-primary' onClick={() => setIsMobileMenuOpen(prev => !prev)}>
       {isMobileMenuOpen ? <X size={24}/> : <Menu size={24}/>}    
     </button>
@@ -52,5 +62,4 @@ const Navbar = () => {
 </header>
   )
 }
-
 export default Navbar
