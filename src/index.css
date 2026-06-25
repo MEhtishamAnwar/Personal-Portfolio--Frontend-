@@ -51,7 +51,7 @@
   background-color :color-mix(in srgb, var(--color-surface) 80%  , transparent);
 
  backdrop-filter: blur(16px);
- border:1px solid color-mix(in srgb, var(--color-border) 60%,transparent)
+ border-bottom:1px solid color-mix(in srgb, var(--color-border) 60%,transparent)
 }
 
 .glow-text{
@@ -162,7 +162,7 @@ opacity: 1;
   }
 
   .group:hover .animated-border-path {
-    animation: animated-border 3.5s linear infinite;
+    animation: animated-border 3s linear infinite;
   }
 
   .animated-border:hover{

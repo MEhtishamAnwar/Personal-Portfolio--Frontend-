@@ -6,7 +6,7 @@ import { useState } from 'react';
 const navlinks=[
   {href:"#about", label:"About"},
   { href: "#projects", label: "Projects" },
-  { href: "#experience", label: "Experience" },
+    { href: "#experience", label: "Experience" },
    { href: "#testimonials", label: "Testimonials" },
 ]
 const Navbar = () => {
@@ -17,17 +17,17 @@ const Navbar = () => {
 
  useEffect(()=>{
   const handleScroll=()=>{
-    setisScrolled(window.scrollY>50);
+   setisScrolled(window.scrollY>50);
 
   }
   window.addEventListener("scroll",handleScroll);
   return()=> window.removeEventListener("scroll",handleScroll);
  },[]);
   return (
-<header className='fixed inset-x-0 top-0 z-50 bg-transparent py-5'>
+<header className={`fixed inset-x-0 transition-all duration-500 ${isScrolled? "glass-strong py-3":"bg-transparent py-5"} top-0 z-50 `}>
   <nav className='container mx-auto px-6 flex items-center justify-between'>
     <a href="#" className='text-xl font-bold tracking-tight hover:text-primary'> 
-      PM <span className='text-primary'>.</span>
+      ME <span className='text-primary'>.</span>
     </a>
     {/* For Desktop veiew */}
     <div className="hidden md:flex items-center gap-1">
@@ -51,11 +51,14 @@ const Navbar = () => {
     <div className="md:hidden glass-strong animate-fade-in absolute top-full left-0 right-0 w-full z-50 bg-background/95 border-b border-border shadow-2xl shadow-black/30">
       <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
         {navlinks.map((link,idx)=>(
-          <a href={link.href} key={idx} className='text-lg text-muted-foreground hover:text-foreground hover:bg-surface rounded-lg px-3 py-2 transition-colors duration-200'>
+          <a href={link.href}
+           key={idx} 
+           onClick={()=>setIsMobileMenuOpen(false)}
+           className='text-lg text-muted-foreground hover:text-foreground hover:bg-surface rounded-lg px-3 py-2 transition-colors duration-200'>
             {link.label}
           </a>
         ))}
-        <Button size="sm">Contact Me</Button>
+        <Button  onClick={()=>setIsMobileMenuOpen(false)} size="sm">Contact Me</Button>
       </div>
     </div>
   )}
