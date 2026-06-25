@@ -1,7 +1,5 @@
 import React from 'react'
 import hero from '@/assets/hero-bg.jpg'
-import profilePic from  '@/assets/Profie.png'
-import profile from '@/assets/profile.jpg'
 import profile1 from '@/assets/finalpro.png'
 import Button from '@/componenet/Button'
 import { ArrowRight, Download, ChevronDown } from 'lucide-react'
@@ -44,6 +42,7 @@ const Hero = () => {
       <div className=" absolute inset-0 overflow-hidden pointer-events-none">
      {[...Array(30)].map((_, i) => (
           <div
+          key={i}
             className="absolute w-1.5 h-1.5 rounded-full opacity-60"
             style={{
               backgroundColor: "#20B2A6",
@@ -88,10 +87,12 @@ const Hero = () => {
               <Button size="default">
                 Contact Me <ArrowRight className='w-5 h-5'/>
               </Button>
-               <AnimatedBorderButton>
-                <Download className="w-5 h-5" />
-                Download CV
-              </AnimatedBorderButton>
+               <a href="/M-Ehtisham-Anwar-CV.pdf" download="M-Ehtisham-Anwar-CV.pdf" className="inline-block">
+                <AnimatedBorderButton>
+                  <Download className="w-5 h-5" />
+                  Download CV
+                </AnimatedBorderButton>
+              </a>
              </div>
              {/* social media links */}
      
