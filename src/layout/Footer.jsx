@@ -24,7 +24,7 @@ export const Footer = () => {
           {/* Logo & Copyright */}
           <div className="text-center md:text-left">
             <a href="#" className="text-xl font-bold tracking-tight">
-              PM<span className="text-primary">.</span>
+              ME<span className="text-primary">.</span>
             </a>
             <p className="text-sm text-gray-400 mt-2">
               © {currentYear} M Ehtisham Anwar. All rights reserved.

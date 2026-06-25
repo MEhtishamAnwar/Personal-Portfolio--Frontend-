@@ -46,22 +46,22 @@ const About = () => {
             </span>
           </h2>
           <div className="space-y-4 text-muted-foreground animate-fade-in animation-delay-200">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam voluptates soluta doloribus doloremque et iure pariatur autem beatae sunt explicabo sequi, provident corporis vitae nisi, amet quo magni commodi  
+            <p>I'm a Software Engineer with a passion for building responsive, user-friendly, and modern web applications. My journey in technology started with a curiosity about how websites work, which led me to pursue a degree in Software Engineering and develop strong frontend development skills 
 
             </p>
             <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam voluptates soluta doloribus doloremque et iure pariatur autem beatae sunt explicabo sequi, provident corporis vitae nisi, amet quo magni commodi reprehenderit esse debitis quasi adipisci laboriosam placeat qui. Necessitatibus, vel. Exercitationem ullam asperiores quos 
+          I specialize in HTML, CSS, JavaScript, React.js, and Tailwind CSS, creating interactive applications that focus on performance, usability, and clean design. I enjoy transforming ideas into real-world digital solutions that provide value to users
 
             </p>
 
                  <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam voluptates soluta doloribus doloremque et iure pariatur autem beatae sunt explicabo sequi, provident corporis vitae nisi, amet quo magni commodi reprehenderit esse debitis quasi adipisci laborios. 
+                I'm continuously learning new technologies, improving my problem-solving abilities, and working on projects that help me grow as a developer. My goal is to build impactful software and contribute to innovative technology solutions 
 
             </p>
           </div>
           <div className="glass rounded-2xl p-6 glow-border animate-fade-in animation-delay-300  ">
             <p className="text-l font-medium italic text-foreground">
-              corporis vitae nisi, amet quo magni commodi reprehenderit esse debitis quasi adipisci laborios. 
+            "My mission is to create modern, scalable, and user-friendly web applications while continuously learning and growing as a software engineer."
             </p>
           </div>
         </div>

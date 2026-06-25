@@ -78,7 +78,7 @@ const Hero = () => {
                   precision.
                 </span>
               </h1>
-              <p  className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">Hi, I'm M. Ehtisham Anwar — a Software Engineer and Front-End Developer. I build responsive, modern web applications using HTML, CSS, JavaScript, and React. i build scalable  web application that users love  </p>
+              <p  className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">Hi, I'm <span className=' text-primary '>M. Ehtisham Anwar</span>— a Software Engineer and Front-End Developer. I build responsive, modern web applications using HTML, CSS, JavaScript, and React. i build scalable  web application that users love  </p>
              </div>
 
              {/* CTAs */}
@@ -87,7 +87,7 @@ const Hero = () => {
               <Button size="default">
                 Contact Me <ArrowRight className='w-5 h-5'/>
               </Button>
-               <a href="/M-Ehtisham-Anwar-CV.pdf" download="M-Ehtisham-Anwar-CV.pdf" className="inline-block">
+               <a href="/Ehtisham_Anwar_CV1.pdf" download="Ehtisham_Anwar_CV1.pdf" className="inline-block">
                 <AnimatedBorderButton>
                   <Download className="w-5 h-5" />
                   Download CV
