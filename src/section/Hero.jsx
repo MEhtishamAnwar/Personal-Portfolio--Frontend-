@@ -1,6 +1,6 @@
 import React from 'react'
 import hero from '@/assets/hero-bg.jpg'
-import profile1 from '@/assets/finalpro.png'
+import profile1 from '@/assets/Profile-Image.jpeg'
 import Button from '@/componenet/Button'
 import { ArrowRight, Download, ChevronDown } from 'lucide-react'
 import { FaGithub, FaLinkedin, FaTwitter, FaFacebook } from 'react-icons/fa'
@@ -27,7 +27,7 @@ const skills = [
 ];
 const Hero = () => {
   return (
-   <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden">
       {/* Bg */}
       <div className="absolute inset-0">
         <img
@@ -35,29 +35,28 @@ const Hero = () => {
           alt="Hero image"
           className="w-full h-full object-cover opacity-40"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background" 
-  
+        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/80 to-background"
+
         />
       </div>
       <div className=" absolute inset-0 overflow-hidden pointer-events-none">
-     {[...Array(30)].map((_, i) => (
+        {[...Array(30)].map((_, i) => (
           <div
-          key={i}
+            key={i}
             className="absolute w-1.5 h-1.5 rounded-full opacity-60"
             style={{
               backgroundColor: "#20B2A6",
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animation: `slow-drift ${
-                15 + Math.random() * 20
-              }s ease-in-out infinite`,
+              animation: `slow-drift ${15 + Math.random() * 20
+                }s ease-in-out infinite`,
               animationDelay: `${Math.random() * 5}s`,
             }}
           />
         ))}
       </div>
       {/* content */}
-    <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
+      <div className="container mx-auto px-6 pt-32 pb-20 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column - Text Content */}
           <div className="space-y-8">
@@ -67,10 +66,10 @@ const Hero = () => {
                 Software Engineer • Web Specialist
               </span>
             </div>
-             {/* heading */}
-             <div className="space-y-4">
-                     <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold animate-fade-in animation-delay-100 tracking-tighter leading-tighter">
-               From <span className="text-primary glow-text">ideas to responsive</span>
+            {/* heading */}
+            <div className="space-y-4">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold animate-fade-in animation-delay-100 tracking-tighter leading-tighter">
+                From <span className="text-primary glow-text">ideas to responsive</span>
                 <br />
                 web apps with
                 <br />
@@ -78,25 +77,25 @@ const Hero = () => {
                   precision.
                 </span>
               </h1>
-              <p  className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">Hi, I'm <span className=' text-primary '>M. Ehtisham Anwar</span>— a Software Engineer and Front-End Developer. I build responsive, modern web applications using HTML, CSS, JavaScript, and React. i build scalable  web application that users love  </p>
-             </div>
+              <p className="text-lg text-muted-foreground max-w-lg animate-fade-in animation-delay-200">Hi, I'm <span className=' text-primary '>M. Ehtisham Anwar</span>— a Software Engineer and Front-End Developer. I build responsive, modern web applications using HTML, CSS, JavaScript, and React. i build scalable  web application that users love  </p>
+            </div>
 
-             {/* CTAs */}
-             <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-4 animate-fade-in animation-delay-300">
 
               <Button size="default" >
-               <a href="#contact">Contact Me</a>  <ArrowRight className='w-5 h-5'/>
+                <a href="#contact">Contact Me</a>  <ArrowRight className='w-5 h-5' />
               </Button>
-               <a href="/Ehtisham CV.pdf" download="Ehtisham CV.pdf" className="inline-block">
+              <a href="/Ehtisham CV.pdf" download="Ehtisham CV.pdf" className="inline-block">
                 <AnimatedBorderButton>
                   <Download className="w-5 h-5" />
                   Download CV
                 </AnimatedBorderButton>
               </a>
-             </div>
-             {/* social media links */}
-     
-          <div className="flex items-center gap-3 animate-fade-in animation-delay-400">
+            </div>
+            {/* social media links */}
+
+            <div className="flex items-center gap-3 animate-fade-in animation-delay-400">
               <span className="text-sm text-muted-foreground ">Follow me: </span>
               {[
                 { icon: FaGithub, href: "https://github.com/MEhtishamAnwar" },
@@ -114,8 +113,8 @@ const Hero = () => {
               ))}
             </div>
           </div>
-{/* Right */}
- {/* Right Column - Profile Image */}
+          {/* Right */}
+          {/* Right Column - Profile Image */}
           <div className="relatice animate-fade-in animation-delay-300">
             {/* Profile Image */}
             <div className="relative max-w-md mx-auto">
