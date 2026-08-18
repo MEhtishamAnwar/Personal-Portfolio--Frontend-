@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Award, Calendar, ExternalLink, ShieldCheck, Eye, X, Copy, Check } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Award, Calendar, ExternalLink, ShieldCheck, Eye, X, Copy, Check, Maximize2, Download, FileImage } from "lucide-react";
 
 const certifications = [
   {
@@ -53,6 +53,18 @@ const Certification = () => {
   const [selectedCert, setSelectedCert] = useState(null);
   const [copiedId, setCopiedId] = useState(null);
 
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setSelectedCert(null);
+      }
+    };
+    if (selectedCert) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedCert]);
+
   const handleCopy = (id, text) => {
     navigator.clipboard.writeText(text);
     setCopiedId(id);
@@ -78,7 +90,7 @@ const Certification = () => {
             </span>
           </h2>
           <p className="text-muted-foreground text-base md:text-lg animate-fade-in animation-delay-200 leading-relaxed">
-            Official credentials from Meta and IBM validating industry-recognized expertise in modern Front-End Development, Node.js Back-End Engineering, and MongoDB Database Applications.
+            Official verified certificates from Meta and IBM showcasing expertise in modern Front-End Development, Node.js Back-End Engineering, and MongoDB Applications.
           </p>
         </div>
 
@@ -90,29 +102,45 @@ const Certification = () => {
               className="group glass rounded-2xl border border-primary/20 hover:border-primary/60 transition-all duration-500 hover:-translate-y-1.5 flex flex-col overflow-hidden animate-fade-in shadow-xl hover:shadow-primary/10"
               style={{ animationDelay: `${(idx + 1) * 120}ms` }}
             >
-              {/* Image Preview Banner */}
+              {/* Original Certificate Image Banner */}
               <div 
-                className="relative h-52 overflow-hidden bg-surface cursor-pointer group/img"
+                className="relative h-56 bg-slate-950/70 overflow-hidden cursor-pointer group/img border-b border-border/40 p-2 flex items-center justify-center"
                 onClick={() => setSelectedCert(cert)}
               >
+                {/* Background ambient image blur */}
                 <img
                   src={cert.image}
-                  alt={`${cert.title} Certificate`}
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/img:scale-105"
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover opacity-20 blur-md scale-110 pointer-events-none"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent opacity-80 group-hover/img:opacity-60 transition-opacity" />
+
+                {/* Original Certificate Image Crisp Preview */}
+                <img
+                  src={cert.image}
+                  alt={`${cert.title} Original Certificate`}
+                  className="relative z-10 max-h-full max-w-full object-contain rounded-lg shadow-md transition-transform duration-500 group-hover/img:scale-105"
+                />
+                <div className="absolute inset-0 z-20 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-60 group-hover/img:opacity-30 transition-opacity" />
                 
                 {/* Issuer Badge */}
-                <div className="absolute top-3 left-3 z-10">
+                <div className="absolute top-3 left-3 z-30">
                   <span className={`px-3 py-1 text-xs font-semibold rounded-full border backdrop-blur-md ${cert.badgeBg}`}>
                     {cert.issuer} Verified
                   </span>
                 </div>
 
-                {/* Hover Quick Zoom Button */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 bg-background/40 backdrop-blur-[2px]">
-                  <span className="px-4 py-2 bg-primary text-primary-foreground font-medium text-xs rounded-xl flex items-center gap-2 shadow-lg transform translate-y-2 group-hover/img:translate-y-0 transition-transform">
-                    <Eye className="w-4 h-4" /> Preview Certificate
+                {/* Original Badge */}
+                <div className="absolute top-3 right-3 z-30">
+                  <span className="px-2.5 py-1 text-[11px] font-medium tracking-wide rounded-full bg-background/80 text-foreground/90 backdrop-blur-md border border-border/60 flex items-center gap-1 shadow-sm">
+                    <FileImage className="w-3 h-3 text-primary" /> Original Picture
+                  </span>
+                </div>
+
+                {/* Hover Zoom Overlay */}
+                <div className="absolute inset-0 z-30 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 bg-background/40 backdrop-blur-[2px]">
+                  <span className="px-4 py-2 bg-primary text-primary-foreground font-semibold text-xs rounded-xl flex items-center gap-2 shadow-xl transform translate-y-2 group-hover/img:translate-y-0 transition-transform">
+                    <Maximize2 className="w-4 h-4" /> View Original Certificate
                   </span>
                 </div>
               </div>
@@ -125,7 +153,7 @@ const Certification = () => {
                       <Calendar className="w-3.5 h-3.5 text-primary" />
                       {cert.date}
                     </span>
-                    <span className="text-[11px] px-2 py-0.5 rounded bg-surface border border-border/60">
+                    <span className="text-[11px] px-2 py-0.5 rounded bg-surface border border-border/60 font-medium">
                       {cert.type}
                     </span>
                   </div>
@@ -172,16 +200,26 @@ const Certification = () => {
                     </button>
                   </div>
 
-                  {/* External Verify Link */}
-                  <a
-                    href={cert.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 w-full mt-3 py-2.5 px-4 rounded-xl bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground font-medium text-xs transition-all duration-300 border border-primary/30 hover:border-primary group/btn"
-                  >
-                    <span>Verify Credential</span>
-                    <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
-                  </a>
+                  {/* Action Buttons: View Original & Verify */}
+                  <div className="grid grid-cols-2 gap-2 mt-3">
+                    <button
+                      onClick={() => setSelectedCert(cert)}
+                      className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-surface hover:bg-primary/20 text-foreground hover:text-primary font-medium text-xs transition-all duration-300 border border-border/60 hover:border-primary/40"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>Original Picture</span>
+                    </button>
+
+                    <a
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-primary/10 hover:bg-primary text-primary hover:text-primary-foreground font-medium text-xs transition-all duration-300 border border-primary/30 hover:border-primary group/btn"
+                    >
+                      <span>Verify</span>
+                      <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" />
+                    </a>
+                  </div>
                 </div>
               </div>
             </article>
@@ -189,60 +227,91 @@ const Certification = () => {
         </div>
       </div>
 
-      {/* Certificate Preview Modal */}
+      {/* High-Resolution Certificate Modal Viewer */}
       {selectedCert && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-md animate-fade-in"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-background/85 backdrop-blur-md animate-fade-in"
           onClick={() => setSelectedCert(null)}
         >
           <div 
-            className="relative max-w-4xl w-full glass border border-primary/30 rounded-2xl overflow-hidden shadow-2xl p-4 md:p-6"
+            className="relative max-w-5xl w-full glass border border-primary/30 rounded-2xl overflow-hidden shadow-2xl p-4 md:p-6 flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between mb-4 border-b border-border/50 pb-3">
-              <div>
-                <span className="text-xs text-primary font-semibold uppercase tracking-wider">{selectedCert.issuer} Official Certificate</span>
-                <h3 className="text-xl font-bold text-foreground">{selectedCert.title}</h3>
+            <div className="flex items-center justify-between mb-4 border-b border-border/50 pb-3 shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
+                  <Award className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-primary font-semibold uppercase tracking-wider">{selectedCert.issuer} Official Certificate</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-medium">Verified</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground mt-0.5">{selectedCert.title}</h3>
+                </div>
               </div>
+              
               <button
                 onClick={() => setSelectedCert(null)}
                 className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-surface transition-colors"
+                title="Close (Esc)"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Certificate Image View */}
-            <div className="relative max-h-[70vh] overflow-auto rounded-xl border border-border/40 bg-surface flex items-center justify-center">
+            {/* Certificate Original High-Res Image View */}
+            <div className="relative flex-grow overflow-auto rounded-xl border border-border/50 bg-slate-950/80 p-2 md:p-4 flex items-center justify-center min-h-[300px]">
               <img
                 src={selectedCert.image}
-                alt={selectedCert.title}
-                className="w-full h-auto object-contain rounded-lg max-h-[68vh]"
+                alt={`${selectedCert.title} Original Certificate`}
+                className="w-full h-auto object-contain rounded-lg max-h-[65vh] shadow-2xl"
               />
             </div>
 
             {/* Modal Footer Controls */}
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-border/50 text-xs">
-              <div className="flex items-center gap-3">
-                <span className="text-muted-foreground font-mono">Credential ID: <strong className="text-foreground">{selectedCert.credentialId}</strong></span>
-                <span className="text-muted-foreground">Issued: <strong className="text-foreground">{selectedCert.date}</strong></span>
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-border/50 text-xs shrink-0">
+              <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
+                <span className="font-mono">Credential ID: <strong className="text-foreground">{selectedCert.credentialId}</strong></span>
+                <span>Issue Date: <strong className="text-foreground">{selectedCert.date}</strong></span>
               </div>
 
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-2">
                 <button
                   onClick={() => handleCopy(selectedCert.id, selectedCert.credentialId)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface border border-border text-foreground hover:bg-surface/80 transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface border border-border text-foreground hover:bg-surface/80 transition-colors"
                 >
                   {copiedId === selectedCert.id ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                   {copiedId === selectedCert.id ? "Copied ID!" : "Copy ID"}
                 </button>
 
                 <a
+                  href={selectedCert.image}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface border border-border text-foreground hover:bg-surface/80 transition-colors"
+                  title="Open full resolution image in new tab"
+                >
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  Full Image
+                </a>
+
+                <a
+                  href={selectedCert.image}
+                  download={`${selectedCert.id}-certificate.png`}
+                  className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-surface border border-border text-foreground hover:bg-surface/80 transition-colors"
+                  title="Download Certificate Image"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  Download
+                </a>
+
+                <a
                   href={selectedCert.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors shadow-md"
                 >
                   Verify at Coursera <ExternalLink className="w-3.5 h-3.5" />
                 </a>
@@ -256,4 +325,5 @@ const Certification = () => {
 };
 
 export default Certification;
+
 
